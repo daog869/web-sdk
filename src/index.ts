@@ -1,7 +1,24 @@
-// Main SDK export file
-export * from './vizion-gateway';
-export * from './models/payment';
-export * from './models/transaction';
-export * from './utils/errors';
-export * from './components/payment-form';
-export * from './services/payment-service'; 
+/**
+ * Vizion Gateway SDK for Payment Processing
+ * @module VizionGateway
+ */
+
+export * from './types';
+export * from './client';
+export * from './paymentForm';
+export * from './errors';
+export * from './utils';
+
+// Re-export the main classes and functions
+import { VizionGatewayClient } from './client';
+import { PaymentForm } from './paymentForm';
+import { ErrorType, VizionGatewayError } from './errors';
+import { version } from './utils';
+
+export default {
+  VizionGatewayClient,
+  PaymentForm,
+  ErrorType,
+  VizionGatewayError,
+  version
+}; 
