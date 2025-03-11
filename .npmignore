@@ -1,0 +1,34 @@
+# Source files
+src/
+
+# Development files
+.github/
+.vscode/
+examples/
+tests/
+test/
+__tests__/
+coverage/
+.nyc_output/
+
+# Config files
+.eslintrc*
+.prettierrc*
+.babelrc*
+.editorconfig
+tsconfig.json
+jest.config.js
+
+# Git files
+.git/
+.gitignore
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS specific
+.DS_Store
+Thumbs.db 
