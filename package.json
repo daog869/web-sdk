@@ -1,0 +1,39 @@
+{
+  "name": "vizion-gateway-sdk",
+  "version": "1.0.0",
+  "description": "Vizion Gateway payment processing SDK for web applications",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest",
+    "lint": "eslint src --ext .ts",
+    "prepare": "npm run build"
+  },
+  "keywords": [
+    "payment",
+    "processing",
+    "vizion",
+    "gateway",
+    "caribbean"
+  ],
+  "author": "Vizion Gateway Inc.",
+  "license": "proprietary",
+  "devDependencies": {
+    "@types/jest": "^29.5.11",
+    "@types/node": "^20.10.5",
+    "@typescript-eslint/eslint-plugin": "^6.15.0",
+    "@typescript-eslint/parser": "^6.15.0",
+    "eslint": "^8.56.0",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.1",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "axios": "^1.6.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/daog869/web-sdk.git"
+  }
+} 

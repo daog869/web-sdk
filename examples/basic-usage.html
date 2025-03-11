@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vizion Gateway SDK Example</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      line-height: 1.6;
+    }
+    
+    h1 {
+      color: #4f46e5;
+      margin-bottom: 30px;
+    }
+    
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+    }
+    
+    .form-container {
+      flex: 1;
+      min-width: 300px;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    }
+    
+    .info-container {
+      flex: 1;
+      min-width: 300px;
+    }
+    
+    .success-message {
+      display: none;
+      background-color: #ecfdf5;
+      border: 1px solid #10b981;
+      color: #047857;
+      padding: 15px;
+      border-radius: 6px;
+      margin-top: 20px;
+    }
+    
+    .transaction-details {
+      background-color: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-radius: 6px;
+      padding: 15px;
+      margin-top: 20px;
+      font-family: monospace;
+      white-space: pre-wrap;
+    }
+    
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Vizion Gateway Payment Example</h1>
+  
+  <div class="container">
+    <div class="form-container">
+      <h2>Payment Form</h2>
+      <div id="payment-form-container"></div>
+    </div>
+    
+    <div class="info-container">
+      <h2>Test Information</h2>
+      <p>Use the following test card details:</p>
+      <ul>
+        <li><strong>Card Number:</strong> 4242 4242 4242 4242</li>
+        <li><strong>Expiry Date:</strong> Any future date (e.g., 12/25)</li>
+        <li><strong>CVC:</strong> Any 3 digits (e.g., 123)</li>
+        <li><strong>Name:</strong> Any name</li>
+      </ul>
+      
+      <div class="success-message" id="success-message">
+        Payment processed successfully!
+      </div>
+      
+      <div class="transaction-details" id="transaction-details"></div>
+    </div>
+  </div>
+  
+  <!-- Replace with actual SDK path when published -->
+  <script src="../dist/vizion-gateway-sdk.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Initialize the SDK
+      const { VizionGateway, Environment, PaymentForm, Currency } = VizionGateway;
+      
+      VizionGateway.initialize({
+        apiKey: 'test_api_key', // Replace with your actual API key
+        merchantId: 'test_merchant_id', // Replace with your actual merchant ID
+        environment: Environment.SANDBOX
+      });
+      
+      // Create and mount payment form
+      const paymentForm = new PaymentForm({
+        amount: 49.99,
+        currency: Currency.XCD,
+        sourceId: 'customer_123',
+        destinationId: 'merchant_123',
+        orderId: 'order_' + Date.now(),
+        description: 'Payment for Example Order',
+        onSuccess: function(response) {
+          // Show success message
+          document.getElementById('success-message').style.display = 'block';
+          
+          // Show transaction details
+          document.getElementById('transaction-details').textContent = 
+            JSON.stringify(response, null, 2);
+          
+          console.log('Payment successful!', response);
+        },
+        onError: function(error) {
+          console.error('Payment failed:', error);
+          alert('Payment failed: ' + error.message);
+        },
+        styles: {
+          baseColor: '#4f46e5',
+          fontFamily: 'Segoe UI, Tahoma, Geneva, Verdana, sans-serif',
+          borderRadius: '6px'
+        }
+      });
+      
+      // Mount the payment form
+      paymentForm.mount('payment-form-container');
+    });
+  </script>
+</body>
+</html> 
